@@ -1,12 +1,24 @@
-ErrorDocument 403 "NNoob"
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /moscovium/
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteEngine On
 
-  RewriteRule ^(.*)$ index.php?uri=$1
+    ErrorDocument 403 /moscovium/resources/pages/404.php
 
-  
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+
+    # Send Requests To Front Controller...
+     RewriteCond %{REQUEST_FILENAME} !-d
+     RewriteCond %{REQUEST_FILENAME} !-f
+     RewriteRule ^ index.php [L]
 </IfModule>

@@ -1,3 +1,8 @@
+<?php 
+require_once __DIR__ . "./../../Main/Essential/RedirectNotRoute.php";
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,4 +13,23 @@
  <body>
  	<h1> Hello Word ! </h1>
 </body>
+ <script type="text/javascript">
+	
+	window.addEventListener("load", () => {
+
+		fetch("Main/Controller/UserController.php", {
+				method: "POST",
+				body: null
+			}).then(response => response.json())
+		    .then(res =>  {
+
+		    	alert(res.message);
+		});
+
+	});
+
+
+</script>
+
+
 </html>

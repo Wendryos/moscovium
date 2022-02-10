@@ -1,5 +1,5 @@
 <?php 
-
+require_once __DIR__ . "./../Essential/Constants.php";
 
 class Router 
 {
@@ -26,11 +26,12 @@ class Router
 		($this->request == ""  ? $this->request = "index" : $this->request = $this->request);
 
 		if (in_array($this->request, $this->expected_url)): 
-			include  __DIR__ . "./../../Resources/Pages/{$this->request}.php";
-			
+			include  __VIEW__ . "{$this->request}.php";
+		else:
+			include  __VIEW__ . "404.php";
 		endif;
 
-		
+	
 
 	}
 

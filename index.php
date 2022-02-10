@@ -5,8 +5,3 @@ $request = $_SERVER['REQUEST_URI'];
 $router = new Router();
 $router->RouterRedirect($request);
 
-
-
-
-
-
